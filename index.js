@@ -5,12 +5,17 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: "*", // 🔥 TEMP FIX: Allow all origins (for debugging)
+const corsOptions = {
+    origin: ["http://localhost:3000", "https://devessence.vercel.app"], // ✅ Allows both local & deployed frontend
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
     credentials: true
-}));
+};
+app.use(cors(corsOptions));
+
+// ✅ Explicitly allow OPTIONS method for preflight requests
+app.options("*", cors(corsOptions));
+
 
 
 
