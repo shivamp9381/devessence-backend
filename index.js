@@ -6,10 +6,12 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000", "https://devessence.vercel.app"], // ✅ Allows both local and deployed frontend
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"]
+    origin: "*", // 🔥 TEMP FIX: Allow all origins (for debugging)
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true
 }));
+
 
 
 // ✅ Configure Nodemailer Transporter
