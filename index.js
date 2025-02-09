@@ -51,11 +51,14 @@ app.post("/send-email", async (req, res) => {
     }
 });
 
-// ✅ Start Server
+// // ✅ Start Server
+// const PORT = process.env.PORT || 5001;
+// app.listen(PORT, () => {
+//     console.log(`🚀 Server running on port ${PORT}`);
+//     if (process.env.RAILWAY_STATIC_URL) {
+//         console.log(`🌍 Deployed at: https://${process.env.RAILWAY_STATIC_URL}`);
+//     }
+// });
+
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
-    if (process.env.RAILWAY_STATIC_URL) {
-        console.log(`🌍 Deployed at: https://${process.env.RAILWAY_STATIC_URL}`);
-    }
-});
+app.listen(PORT, "0.0.0.0", () => console.log(`🚀 Server running on port ${PORT}`));
