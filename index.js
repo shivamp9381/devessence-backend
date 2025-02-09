@@ -5,7 +5,11 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // ✅ Enables frontend access
+app.use(cors({
+    origin: ["https://devessence.vercel.app/"], // Replace with your frontend URL
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"]
+}));
 
 // ✅ Configure Nodemailer Transporter
 const transporter = nodemailer.createTransport({
