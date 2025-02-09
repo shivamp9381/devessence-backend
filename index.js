@@ -6,17 +6,18 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: ["https://devessence.vercel.app/"], // Replace with your frontend URL
+    origin: ["http://localhost:3000", "https://devessence.vercel.app"], // ✅ Allows both local and deployed frontend
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"]
 }));
+
 
 // ✅ Configure Nodemailer Transporter
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
         user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+        pass: process.env.PASSWORD, // ✅ Use a Google App Password
     },
 });
 
@@ -52,4 +53,9 @@ app.post("/send-email", async (req, res) => {
 
 // ✅ Start Server
 const PORT = process.env.PORT || 5001;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+    if (process.env.RAILWAY_STATIC_URL) {
+        console.log(`🌍 Deployed at: https://${process.env.RAILWAY_STATIC_URL}`);
+    }
+});
